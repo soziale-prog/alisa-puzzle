@@ -11,6 +11,7 @@ const screens = {
 };
 
 const levelGrid = document.getElementById("levelGrid");
+const menuStartButton = document.getElementById("menuStartButton");
 const canvas = document.getElementById("puzzleCanvas");
 const levelTitle = document.getElementById("levelTitle");
 const progressText = document.getElementById("progressText");
@@ -24,6 +25,7 @@ const shuffleButton = document.getElementById("shuffleButton");
 const soundButton = document.getElementById("soundButton");
 
 let currentLevel = levels[0];
+let selectedLevel = levels[0];
 let game = null;
 let progress = loadProgress();
 let soundEnabled = true;
@@ -39,14 +41,19 @@ nextButton.addEventListener("click", startNextLevel);
 hintButton.addEventListener("click", toggleHint);
 shuffleButton.addEventListener("click", () => game?.shufflePieces());
 soundButton.addEventListener("click", toggleSound);
+menuStartButton.addEventListener("click", () => startLevel(selectedLevel));
 
 function renderMenu() {
   levelGrid.innerHTML = "";
 
   levels.forEach((level) => {
     const levelState = progress.levels[level.id] || {};
+    const isSelected = level.id === selectedLevel.id;
     const card = document.createElement("article");
-    card.className = "level-card";
+    card.className = `level-card${isSelected ? " is-selected" : ""}`;
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-pressed", String(isSelected));
     card.innerHTML = `
       <img src="${level.thumb}" alt="${level.title}">
       <div class="level-card__body">
@@ -54,17 +61,32 @@ function renderMenu() {
           <div class="level-card__title">${level.title}</div>
           <div class="level-card__meta">${level.rows} × ${level.cols} кусочков${levelState.completed ? " · собрано" : ""}</div>
         </div>
-        <button class="action-button action-button--primary" type="button">Играть</button>
       </div>
     `;
 
-    card.querySelector("button").addEventListener("click", () => startLevel(level));
+    card.addEventListener("click", () => selectLevel(level));
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        selectLevel(level);
+      }
+    });
     levelGrid.appendChild(card);
+  });
+}
+
+function selectLevel(level) {
+  selectedLevel = level;
+  levelGrid.querySelectorAll(".level-card").forEach((card, index) => {
+    const isSelected = levels[index].id === selectedLevel.id;
+    card.classList.toggle("is-selected", isSelected);
+    card.setAttribute("aria-pressed", String(isSelected));
   });
 }
 
 async function startLevel(level) {
   currentLevel = level;
+  selectedLevel = level;
   levelTitle.textContent = level.title;
   progressText.textContent = `0 / ${level.rows * level.cols}`;
   setHintButtonState(false);
