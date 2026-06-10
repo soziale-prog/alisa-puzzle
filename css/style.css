@@ -188,7 +188,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 18px;
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .level-card {
@@ -327,13 +327,13 @@ h2 {
 .menu-actions {
   position: relative;
   z-index: 1;
-  margin-top: 18px;
+  margin-top: 12px;
 }
 
 .menu-start-button {
   width: 100%;
-  min-height: 62px;
-  font-size: 24px;
+  min-height: 56px;
+  font-size: 23px;
 }
 
 .action-button img {
@@ -559,8 +559,8 @@ h2 {
   }
 
   .menu-start-button {
-    min-height: 58px;
-    font-size: 22px;
+    min-height: 54px;
+    font-size: 21px;
   }
 
   .game-toolbar {
