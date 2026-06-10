@@ -112,6 +112,13 @@ button {
   border: 0;
 }
 
+.menu-header > div:first-child {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+
 .menu-header::after {
   display: none;
 }
@@ -130,6 +137,10 @@ button {
   text-transform: uppercase;
 }
 
+.menu-header .kicker {
+  display: none;
+}
+
 h1,
 h2 {
   margin: 0;
@@ -137,9 +148,12 @@ h2 {
 }
 
 h1 {
-  max-width: 620px;
-  font-size: clamp(24px, 2.4vw, 32px);
+  flex: 0 0 auto;
+  max-width: none;
+  font-size: 27px;
+  font-weight: 900;
   letter-spacing: 0;
+  line-height: 1.05;
   text-shadow: none;
 }
 
@@ -151,11 +165,12 @@ h2 {
 }
 
 .menu-subtitle {
-  max-width: 620px;
-  margin: 4px 0 0;
+  max-width: none;
+  margin: 0;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.35;
+  white-space: nowrap;
 }
 
 .stars-pill {
@@ -527,7 +542,7 @@ h2 {
   }
 
   h1 {
-    font-size: 30px;
+    font-size: 27px;
   }
 }
 
@@ -538,12 +553,18 @@ h2 {
     gap: 14px;
   }
 
+  .menu-header > div:first-child {
+    display: block;
+  }
+
   .menu-header::after {
     display: none;
   }
 
   .menu-subtitle {
     font-size: 17px;
+    margin-top: 4px;
+    white-space: normal;
   }
 
   h1 {
