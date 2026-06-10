@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Волшебные пазлы</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="screen screen--menu is-active" id="menuScreen">
+        <header class="menu-header">
+          <div>
+            <p class="kicker">Пазл</p>
+            <h1>Волшебные пазлы</h1>
+            <p class="menu-subtitle">Выбери картинку и собери её из настоящих кусочков.</p>
+          </div>
+          <div class="stars-pill" aria-label="Всего звёзд">
+            <img src="assets/ui/star.svg" alt="">
+            <span data-stars-total>0</span>
+          </div>
+        </header>
+
+        <h2>Выбери картинку</h2>
+        <div class="level-grid" id="levelGrid"></div>
+      </section>
+
+      <section class="screen screen--game" id="gameScreen">
+        <header class="game-toolbar">
+          <button class="icon-button" id="homeButton" type="button" aria-label="Домой" title="Домой">
+            <img src="assets/ui/home.svg" alt="">
+          </button>
+          <div class="game-title">
+            <span id="levelTitle">Пазл</span>
+            <strong id="progressText">0 / 12</strong>
+          </div>
+          <div class="stars-pill">
+            <img src="assets/ui/star.svg" alt="">
+            <span data-stars-total>0</span>
+          </div>
+          <button class="icon-button" id="soundButton" type="button" aria-label="Звук" title="Звук">
+            <img src="assets/ui/sound.svg" alt="">
+          </button>
+        </header>
+
+        <div class="game-layout">
+          <div class="tool-column">
+            <button class="action-button" id="hintButton" type="button" aria-pressed="false">
+              <img src="assets/ui/hint.svg" alt="">
+              Подсказка
+            </button>
+            <button class="action-button" id="shuffleButton" type="button">
+              <img src="assets/ui/shuffle.svg" alt="">
+              Перемешать
+            </button>
+          </div>
+          <div class="canvas-wrap">
+            <canvas id="puzzleCanvas" width="2260" height="1060" aria-label="Игровое поле пазла"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen--success" id="successScreen" aria-live="polite">
+        <div class="success-panel">
+          <img class="mascot" src="assets/characters/mascot.svg" alt="">
+          <p class="kicker">Молодец!</p>
+          <h2>Пазл собран!</h2>
+          <p>Ты получил <strong>+20</strong> звёзд.</p>
+          <div class="success-actions">
+            <button class="action-button" id="againButton" type="button">Ещё раз</button>
+            <button class="action-button action-button--primary" id="nextButton" type="button">Следующий</button>
+            <button class="action-button" id="successHomeButton" type="button">Домой</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/levels.js"></script>
+    <script src="js/puzzle.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
